@@ -1,0 +1,8 @@
+streamlit==1.22.0
+yfinance==0.2.18
+pandas==1.3.5
+numpy==1.21.6
+base64
+datetime
+plotly==5.14.1
+scipy
