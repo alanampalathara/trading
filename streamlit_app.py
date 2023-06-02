@@ -142,7 +142,7 @@ def stock_compar(stock1, stock2, date, end, invest_amt, z_score):
         z_score_df = result[['Date','Z_score(20DMA)']]
 
         result['Signal'] = result['Signal'].replace({0.5:"NA", 1.0:"Sell Stock2 and buy Stock1", 0.0:"Sell Stock1 and buy Stock2"})
-        result.drop(result[result['Signal'] == "NA"].index, inplace = True)
+        # result.drop(result[result['Signal'] == "NA"].index, inplace = True)
 
         
         return result, z_score_df
@@ -172,7 +172,7 @@ with tab1:
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, graph_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
-        df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
+        # df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
         # CSS to inject contained in a string
         hide_table_row_index = """
                     <style>
