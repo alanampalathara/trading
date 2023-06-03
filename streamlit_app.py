@@ -9,11 +9,13 @@ import plotly.express as px
 from scipy.stats import zscore
 
 # Load the TOML file for theme configuration
-config_data = toml.load('config.toml')
+#config_data = toml.load('config.toml')
 
 # Apply theme settings if necessary
-st.set_page_config(**config_data['theme'])
+#st.set_page_config(**config_data['theme'])
 
+# Set the theme to light
+st.set_theme('light')
 
 #def add_bg_from_local(image_file):
  #   with open(image_file, "rb") as image_file:
