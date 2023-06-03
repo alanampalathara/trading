@@ -5,12 +5,15 @@ import numpy as np
 import base64
 import datetime
 import plotly.express as px
-from streamlit import config
 from scipy.stats import zscore
 
 
-config.file_loader('https://github.com/alanampalathara/trading/blob/main/config.toml')
-st.set_page_config(**config.get_option('theme'))
+# Load the TOML file for theme configuration
+with open('https://github.com/alanampalathara/trading/blob/main/config.toml', 'r') as f:
+    config_data = toml.load(f)
+  
+# Apply theme settings if necessary
+st.set_page_config(**config_data['theme'])
 
 
 #def add_bg_from_local(image_file):
