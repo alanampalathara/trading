@@ -12,7 +12,7 @@ from scipy.stats import zscore
 config_data = toml.load('config.toml')
 
 # Apply theme settings if necessary
-st.set_page_config(config_data['theme'])
+st.set_page_config(*config_data['theme'])
 
 
 #def add_bg_from_local(image_file):
