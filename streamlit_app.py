@@ -4,14 +4,13 @@ import pandas as pd
 import numpy as np
 import base64
 import datetime
+import toml
 import plotly.express as px
 from scipy.stats import zscore
 
-
 # Load the TOML file for theme configuration
-with open('https://github.com/alanampalathara/trading/blob/main/config.toml', 'r') as f:
-    config_data = toml.load(f)
-  
+config_data = toml.load('https://github.com/alanampalathara/trading/blob/main/config.toml')
+
 # Apply theme settings if necessary
 st.set_page_config(**config_data['theme'])
 
