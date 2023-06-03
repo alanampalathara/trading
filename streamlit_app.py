@@ -13,7 +13,7 @@ config_data = toml.load('config.toml')
 
 # Apply theme settings if necessary
 st.set_page_config(layout="wide", 
-                   *config_data['theme'])
+                   config_data['theme'])
 
 
 #def add_bg_from_local(image_file):
