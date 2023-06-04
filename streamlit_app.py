@@ -187,13 +187,12 @@ with tab1:
         # Inject CSS with Markdown
         st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-        #To convert the dataframe to excel and add download button
-        excel_file_path = f"{stock1}_vs_{stock2}.xlsx"
-        excel_writer = pd.ExcelWriter(excel_file_path)
-        df.to_excel(excel_writer, index=False)
-        excel_writer.save()
-        excel_writer.close()
-        st.download_button(label="Download table in Excel", data=open(excel_file_path, 'rb'), file_name=excel_file_path)
+        #To convert the dataframe to CSV and add download button
+        csv = df.to_csv(index=False).encode('utf-8')
+
+        st.download_button("Download table in csv format",csv,f"{stock1}_vs_{stock2}.csv","text/csv",key='download-csv')
+        
+
         # Display a static table
         st.table(df)
 
