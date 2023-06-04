@@ -5,26 +5,29 @@ import numpy as np
 import base64
 import datetime
 import plotly.express as px
-from scipy.stats import zscore
 
 
 
 #def add_bg_from_local(image_file):
- #   with open(image_file, "rb") as image_file:
-  #      encoded_string = base64.b64encode(image_file.read())
-   # st.markdown(
-  #  f"""
-  #  <style>
-  #  .stApp {{
-   #     background-image: url(data:image/{"jpg"};base64,{encoded_string.decode()});
-    #    background-size: 100% 100%;
+#    with open(image_file, "rb") as file:
+#        encoded_string = base64.b64encode(file.read())
+    
+#    st.markdown(
+#        f"""
+#        <style>
+#        .stApp {{
+#            background-image: url(data:image/{"jpg"};base64,{encoded_string.decode()});
+#            background-repeat: no-repeat;
+#            background-size: 100% 35%;
+#            background-position: top center;
+#            height: 100vh;
+#        }}
+#        </style>
+#        """,
+#        unsafe_allow_html=True
+#    )
 
-   # }}
-   # </style>
-   # """,
-   # unsafe_allow_html=True
-  #  )
-#add_bg_from_local('C:/Users/alant/Documents/Rainman/UI/background.jpg')  
+#add_bg_from_local(r'C:\Users\alant\Documents\Rainman\UI\money-2724248.jpg')  
 
 def stock_compar(stock1, stock2, date, end, invest_amt, z_score):           
     try:
@@ -149,8 +152,8 @@ def stock_compar(stock1, stock2, date, end, invest_amt, z_score):
         return None, None
 
 
+st.markdown(f'<h1 style="color:#212121;font-size:40px;border-radius:3%;">{"ALGORITHMIC TRADING PLATFORM"}</h1>', unsafe_allow_html=True)
 
-st.markdown(f'<h1 style="color:#212121;background-color: rgba(255, 255, 255, 0.3);font-size:40px;border-radius:3%;">{"ALGORITHMIC TRADING PLATFORM"}</h1>', unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["Profitable stocks", "Z graph"])
 
@@ -166,7 +169,9 @@ with tab1:
     end_date = st.sidebar.date_input('End date', today)
 
     invest_amt = st.sidebar.text_input("Invest amount", "Enter the invest amount in rupees")  
+
     graph_df = pd.DataFrame()
+    st.write("To access sidebar, click the arrow located in the top left corner. Fill in the stock credentials in the fields given in the sidebar and click Find.")
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, graph_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
@@ -182,17 +187,25 @@ with tab1:
         # Inject CSS with Markdown
         st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
+        #To convert the dataframe to excel and add download button
+        excel_file_path = f"{stock1}_vs_{stock2}.xlsx"
+        excel_writer = pd.ExcelWriter(excel_file_path)
+        df.to_excel(excel_writer, index=False)
+        excel_writer.save()
+        excel_writer.close()
+        st.download_button(label="Download table in Excel", data=open(excel_file_path, 'rb'), file_name=excel_file_path)
         # Display a static table
         st.table(df)
 
 with tab2:
+    
     if len(graph_df) != 0:
         fig = px.line(graph_df, x="Date", y="Z_score(20DMA)")
         fig.add_shape(type="line", x0=min(graph_df["Date"]), y0=-1.25,x1=max(graph_df["Date"]), y1=-1.25)
         fig.add_shape(type="line",x0=min(graph_df["Date"]), y0=1.25,x1=max(graph_df["Date"]), y1=1.25)
         fig.update_layout(legend_title="legend", font=dict(family="Arial", size=13, color="green"))
         fig.update_layout(yaxis=dict(tickformat='.2f', dtick=0.25))
-        fig.update_layout(title = "ASIAN PAINTS vs AKZO")
+        fig.update_layout(title = f"{stock1} vs {stock2}")
         st.plotly_chart(fig)
 
  
