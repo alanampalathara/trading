@@ -172,31 +172,34 @@ with tab1:
 
     graph_df = pd.DataFrame()
  
-    st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock credentials in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
+    st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock details in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, graph_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
-        # df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
-        # CSS to inject contained in a string
-        hide_table_row_index = """
-                    <style>
-                    thead tr th:first-child {display:none}
-                    tbody th {display:none}
-                    </style>
-                    """
+        if len(df) != 0:
+            # df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
+            # CSS to inject contained in a string
+            hide_table_row_index = """
+                        <style>
+                        thead tr th:first-child {display:none}
+                        tbody th {display:none}
+                        </style>
+                        """
 
-        # Inject CSS with Markdown
-        st.markdown(hide_table_row_index, unsafe_allow_html=True)
+            # Inject CSS with Markdown
+            st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
-        #To convert the dataframe to CSV and add download button
-        csv = df.to_csv(index=False).encode('utf-8')
+            #To convert the dataframe to CSV and add download button
+            csv = df.to_csv(index=False).encode('utf-8')
 
-        st.download_button("Download table in csv format",csv,f"{stock1}_vs_{stock2}.csv","text/csv",key='download-csv')
+            st.download_button("Download table in csv format",csv,f"{stock1}_vs_{stock2}.csv","text/csv",key='download-csv')
+
+
+            # Display a static table
+            st.table(df)
+        else:
+            st.write("Please check the entered details and try again")
         
-
-        # Display a static table
-        st.table(df)
-
 with tab2:
     
     if len(graph_df) != 0:
