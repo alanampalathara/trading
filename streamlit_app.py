@@ -42,14 +42,14 @@ def stock_compar(stock1, stock2, date, end, invest_amt, z_score):
         column_mapping = {'0_x':'Stock1 value', '0_y':'Stock2 value'}
         result = result.rename(columns=column_mapping)
         # Finding ratio between both stocks
-        result["Ratio(Num/Denom)"] = result['Stock1 value']/result['Stock2 value']
+        result["Ratio(stock1/stock2)"] = result['Stock1 value']/result['Stock2 value']
         
         
-        result['5_DMA'] = result["Ratio(Num/Denom)"].rolling(window=5).mean()
-        result['20_DMA'] = result["Ratio(Num/Denom)"].rolling(window=20).mean()
+        result['5_DMA'] = result["Ratio(stock1/stock2)"].rolling(window=5).mean()
+        result['20_DMA'] = result["Ratio(stock1/stock2)"].rolling(window=20).mean()
         
         #result = result.dropna()
-        result["std_20Day"] = result["Ratio(Num/Denom)"].rolling(window=20).std()
+        result["std_20Day"] = result["Ratio(stock1/stock2)"].rolling(window=20).std()
         result["Z_score(20DMA)"] = (result['5_DMA'] - result['20_DMA'])/result["std_20Day"]
         result["Signal"] = np.nan
         result["Quantity of stock1 bought"] = 0.0
