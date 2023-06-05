@@ -171,7 +171,7 @@ with tab1:
     invest_amt = st.sidebar.text_input("Invest amount", "Enter the invest amount in rupees")  
 
     graph_df = pd.DataFrame()
-    st.text("To access sidebar, click the arrow located in the top left corner. Fill in the stock credentials in the fields given in the sidebar and click Find.")
+    st.markdown("**To access sidebar, click the arrow located in the top left corner. Fill in the stock credentials in the fields given in the sidebar and click Find.**")
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, graph_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
