@@ -172,7 +172,7 @@ with tab1:
 
     graph_df = pd.DataFrame()
  
-    st.markdown('<p style="font-family:Arial; font-size: 10px;">To access sidebar, click the arrow located in the top left corner. Fill in the stock credentials in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
+    st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock credentials in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, graph_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
