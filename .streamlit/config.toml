@@ -1,3 +1,6 @@
+[server]
+watch = none
+
 [theme]
 primaryColor="#F63366"
 backgroundColor="#FFFFFF"
