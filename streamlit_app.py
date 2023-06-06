@@ -2,32 +2,9 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 import numpy as np
-import base64
 import datetime
 import plotly.express as px
 
-
-
-#def add_bg_from_local(image_file):
-#    with open(image_file, "rb") as file:
-#        encoded_string = base64.b64encode(file.read())
-    
-#    st.markdown(
-#        f"""
-#        <style>
-#        .stApp {{
-#            background-image: url(data:image/{"jpg"};base64,{encoded_string.decode()});
-#            background-repeat: no-repeat;
-#            background-size: 100% 35%;
-#            background-position: top center;
-#            height: 100vh;
-#        }}
-#        </style>
-#        """,
-#        unsafe_allow_html=True
-#    )
-
-#add_bg_from_local(r'C:\Users\alant\Documents\Rainman\UI\money-2724248.jpg')  
 
 def stock_compar(stock1, stock2, date, end, invest_amt, z_score):           
     try:
