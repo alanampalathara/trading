@@ -217,6 +217,8 @@ with tab1:
     st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock details in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
     if st.button("Find"):
         invest_amt = float(invest_amt) 
+        df = pd.DataFrame()
+        cleaned_df = pd.DataFrame()
         df, cleaned_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
         if df.empty:
             st.write("Please check the entered details and try again")
