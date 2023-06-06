@@ -215,7 +215,9 @@ with tab1:
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, cleaned_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
-        if df != None:
+        if df is None:
+            st.write("Please check the entered details and try again")
+        else:
             # df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
             # CSS to inject contained in a string
             hide_table_row_index = """
@@ -235,17 +237,21 @@ with tab1:
 
             # Display a static table
             st.table(df)
-        else:
-            st.write("Please check the entered details and try again")
+        
+            
         
 with tab2:
     # To show clean table
-    if cleaned_df != None: 
+    if cleaned_df is None:
+        st.write("No data to display.")
+    else:
         st.table(cleaned_df)
         
 with tab3:
     # To display the graph    
-    if df != None:
+    if df is None:
+        st.write("No graph to display.")
+    else:
         fig = px.line(df, x="Date", y="Z_score(20DMA)")
         fig.add_shape(type="line", x0=min(df["Date"]), y0=-1.25,x1=max(df["Date"]), y1=-1.25)
         fig.add_shape(type="line",x0=min(df["Date"]), y0=1.25,x1=max(df["Date"]), y1=1.25)
