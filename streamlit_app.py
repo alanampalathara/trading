@@ -210,12 +210,15 @@ with tab1:
     end_date = st.sidebar.date_input('End date', today)
 
     invest_amt = st.sidebar.text_input("Invest amount", "Enter the invest amount in rupees")  
- 
+    
+    df = pd.DataFrame()
+    cleaned_df = pd.DataFrame()
+    
     st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock details in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, cleaned_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
-        if df is None:
+        if df.empty:
             st.write("Please check the entered details and try again")
         else:
             # df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
@@ -242,14 +245,14 @@ with tab1:
         
 with tab2:
     # To show clean table
-    if cleaned_df is None:
+    if cleaned_df.empty:
         st.write("No data to display.")
     else:
         st.table(cleaned_df)
         
 with tab3:
     # To display the graph    
-    if df is None:
+    if df.empty:
         st.write("No graph to display.")
     else:
         fig = px.line(df, x="Date", y="Z_score(20DMA)")
