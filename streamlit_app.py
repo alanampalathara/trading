@@ -190,7 +190,7 @@ def stock_compar(stock1, stock2, date, end, invest_amt, z_score):
         return result, clean_df
     except Exception as e:
         print(f"Error occurred while fetching stock data: {e}")
-        return None, None
+        return pd.DataFrame(), pd.DataFrame()
 
 
 st.markdown(f'<h1 style="color:#212121;font-size:40px;border-radius:3%;">{"ALGORITHMIC TRADING PLATFORM"}</h1>', unsafe_allow_html=True)
@@ -218,7 +218,7 @@ with tab1:
     if st.button("Find"):
         invest_amt = float(invest_amt) 
         df, cleaned_df = stock_compar(stock1, stock2, start_date, end_date, invest_amt, z_score = 1.25)
-        if df == None:
+        if df.empty:
             st.write("Please check the entered details and try again")
         else:
             # df = df.drop(['Ratio(Num/Denom)', '5_DMA', '20_DMA', 'std_20Day', 'Z_score(20DMA)'], axis=1)
