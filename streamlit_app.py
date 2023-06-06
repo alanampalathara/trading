@@ -218,6 +218,8 @@ def stock_compar(stock1, stock2, date, end, invest_amt, z_score):
 
 st.markdown(f'<h1 style="color:#212121;font-size:40px;border-radius:3%;">{"ALGORITHMIC TRADING PLATFORM"}</h1>', unsafe_allow_html=True)
 
+df = pd.DataFrame()
+cleaned_df= pd.DataFrame()
 
 tab1, tab2, tab3 = st.tabs(["Full table","Transaction dates", "Z graph"])
 
@@ -233,9 +235,6 @@ with tab1:
     end_date = st.sidebar.date_input('End date', today)
 
     invest_amt = st.sidebar.text_input("Invest amount", "Enter the invest amount in rupees")  
-    
-    df = pd.DataFrame()
-    cleaned_df= pd.DataFrame()
  
     st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock details in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
     if st.button("Find"):
