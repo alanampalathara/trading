@@ -1,5 +1,5 @@
 [server]
-watch = none
+watch = None
 
 [theme]
 primaryColor="#F63366"
