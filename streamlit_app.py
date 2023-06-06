@@ -233,8 +233,9 @@ with tab1:
     end_date = st.sidebar.date_input('End date', today)
 
     invest_amt = st.sidebar.text_input("Invest amount", "Enter the invest amount in rupees")  
-
-    graph_df = pd.DataFrame()
+    
+    df = pd.DataFrame()
+    cleaned_df= pd.DataFrame()
  
     st.markdown('<p style="font-family:Arial; font-size: 12px;">*To access sidebar, click the arrow located in the top left corner. Fill in the stock details in the fields given in the sidebar and click Find.</p>',unsafe_allow_html=True)
     if st.button("Find"):
