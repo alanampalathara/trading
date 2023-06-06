@@ -263,12 +263,12 @@ with tab1:
         
 with tab2:
     # To show clean table
-    if len(cleaned_df) != 0: 
+    if cleaned_df != None: 
         st.table(cleaned_df)
         
 with tab3:
-    
-    if len(df) != 0:
+    # To display the graph    
+    if df != None:
         fig = px.line(df, x="Date", y="Z_score(20DMA)")
         fig.add_shape(type="line", x0=min(df["Date"]), y0=-1.25,x1=max(df["Date"]), y1=-1.25)
         fig.add_shape(type="line",x0=min(df["Date"]), y0=1.25,x1=max(df["Date"]), y1=1.25)
